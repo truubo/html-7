@@ -1,0 +1,145 @@
+:root {
+    --window-padding: 6px; /* used to fine tune the padding of the window */
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background-image: url("../resources/img/vista.jpg");
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.window {
+    background: linear-gradient(180deg, rgba(152,180,208,0.25) 0%, rgba(185,209,234,0.25) 15%, rgba(220,232,245,1) 25%, rgba(186,210,234,0.25) 26%, rgba(185,209,234,0.25) 100%);
+    border-radius: 5px;
+    backdrop-filter: blur(3px);
+    box-shadow: 0px 0px 10px #000;
+    outline: 1px solid #242b32;
+    border: 1px solid #fff;
+    padding: var(--window-padding);
+    animation: open 0.4s;
+}
+
+.window-gradient { /* windows 7 uses two gradients for the window background */
+    background: linear-gradient(90deg, rgba(210,232,254,0.25) 0%, rgba(182,217,252,0.25) 50%, rgba(210,232,254,0.25) 100%);
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    position: absolute;
+    transform: translate(calc(var(--window-padding) - (var(--window-padding) * 2)), calc(var(--window-padding) - (var(--window-padding) * 2)));
+    z-index: -1;
+}
+
+.window .title {
+    text-shadow: 0px 0px 5px #fff;
+    height: 20px;
+    margin-bottom: 5px;
+    font-size: 0.8em;
+}
+
+.window .content {
+    --content-padding: 20px;
+    outline: 1px solid #deedfc;
+    border: 1px solid #5c6a79;
+    height: calc(100% - 20px - var(--window-padding) - (var(--content-padding) * 2));
+    border-radius: 1px;
+    background-color: #fff;
+    padding: var(--content-padding);
+}
+
+.popup {
+    position: absolute;
+    max-width: 500px;
+    cursor: default;
+}
+
+.popup .content {
+    --content-padding: 0;
+}
+
+.popup .content .message {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 40px 2fr;
+    gap: 10px;
+    padding: 20px;
+}
+
+.popup .content .buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+    padding-right: 10px;
+    background-color: #f0f0f0;
+    width: calc(100% - 10px);
+    height: 50px;
+}
+
+.popup .content .message .icon {
+    display: flex;
+    align-items: center;
+    width: 40px;
+    grid-column: 1;
+}
+.popup .content .message .icon img {
+    width: 40px;
+}
+
+.popup .content .message .text {
+    font-size: 0.8em;
+    display: flex;
+    align-items: center;
+    text-shadow: 0px 0px 0px #000; /* makes text slightly bolder */
+    height: 100%;
+    grid-column: 2;
+}
+
+button {
+    background-color: #f0f0f0;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #a0a0a0;
+    border-bottom: 1px solid #a0a0a0;
+    box-shadow: -1px 2px 0px #646464, 2px -1px 0px #646464, 2px 2px 0px #646464;
+    outline: 1px solid #646464;
+    min-width: 85px;
+    height: 25px;
+    border-radius: 0;
+}
+
+@keyframes open {
+    0% {
+        opacity: 0;
+        transform: perspective(1000px) rotateX(-15deg) scale(0.90);
+    }
+    100% {
+        opacity: 1;
+        transform: perspective(1000px) rotateX(0deg) scale(1);
+    }
+}
+
+@keyframes close {
+    0% {
+        opacity: 1;
+        transform: perspective(1000px) rotateX(0deg) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: perspective(1000px) rotateX(20deg) scale(0.90);
+    }
+}
